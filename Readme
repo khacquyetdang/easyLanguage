@@ -1,0 +1,10 @@
+for create an react native project:
+react-native init project name
+
+start react-native server
+
+react-native start
+
+start android project
+
+react-native run-android

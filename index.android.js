@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   ListView,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 
 import _ from 'lodash'
@@ -24,7 +25,7 @@ const people = [{firstName: "Dang", lastName: "Khac Quyet"},
                 {firstName: "Dang", lastName: "Leon"}
               ]
 
-export default class testVectorIcon extends Component {
+export default class easyLanguage extends Component {
 
   constructor() {
       super();
@@ -38,6 +39,7 @@ export default class testVectorIcon extends Component {
     return (
     <ViewContainer>
         <ListView
+          style={{marginTop:100}}
           dataSource={this.state.dataSource}
           renderRow={(person) => {return this._renderPersonRow(person)}}
       />
@@ -46,14 +48,16 @@ export default class testVectorIcon extends Component {
   }
 
   _renderPersonRow(person) {
+
+    console.log(person)
     return (
-      <View style={styles.personRow}>
+      <TouchableOpacity  style={styles.personRow} onPress={(event) => console.log("person")}>
         <Text style={styles.personName}>
           {`${person.firstName} ${person.lastName}`}
         </Text>
         <View style={{flex: 1}} />
         <Icon name="chevron-right" size={30} style={styles.personMoreIcon}/>
-      </View>
+      </TouchableOpacity>
     )
   }
 }
@@ -70,7 +74,9 @@ const styles = StyleSheet.create({
 
   personRow: {
     flexDirection: "row",
-    justifyContent: "flex-start"
+    margin:10,
+    justifyContent: "flex-start",
+    alignItems: "center"
   },
 
   personName: {
@@ -86,4 +92,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('testVectorIcon', () => testVectorIcon);
+AppRegistry.registerComponent('easyLanguage', () => easyLanguage);

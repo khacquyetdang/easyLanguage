@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class testVectorIcon extends Component {
+export default class easyLanguage extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('testVectorIcon', () => testVectorIcon);
+AppRegistry.registerComponent('easyLanguage', () => easyLanguage);

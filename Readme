@@ -8,3 +8,7 @@ react-native start
 start android project
 
 react-native run-android
+
+
+cd android
+gradlew clean quand il y a des probleme pour compiler

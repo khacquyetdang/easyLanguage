@@ -1,4 +1,4 @@
-rootProject.name = 'testVectorIcon'
+rootProject.name = 'easyLanguage'
 
 include ':app'
 include ':react-native-vector-icons'

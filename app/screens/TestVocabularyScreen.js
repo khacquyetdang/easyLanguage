@@ -10,91 +10,175 @@ import {
   Button,
   Alert,
   TouchableOpacity,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native';
 
 class TestVocabularyScreen extends React.Component {
   static navigationOptions = {
-    title: 'Person Detail',
+    title: 'Test vocabulaire',
   };
+
+
+
+  myrender() {
+     const { params } = this.props.navigation.state;
+    return (
+              <View style={styles.columnContainer}>
+
+                <View style={styles.rowContainer}>
+                  <View style={styles.column}>
+                  </View>
+
+                  <View style={styles.column}>
+                  </View>
+
+                </View>
+
+                <View style={styles.rowContainer}>
+                  <View style={styles.column}>
+                  </View>
+
+                  <View style={styles.column}>
+                  </View>
+
+                </View>
+
+                <View style={styles.rowContainer}>
+
+                  <TouchableHighlight style={styles.buttonCheck}
+                  onPress={() => { Alert.alert('You tapped the buttobbn!')}}>
+
+                      <Text>Check</Text>
+                  </TouchableHighlight>
+
+                </View>
+
+              </View>
+    );
+  }
+
   render() {
      const { params } = this.props.navigation.state;
     return (
-      <View style={styles.container}>
-        <Text>Person detail</Text>
+              <View style={styles.columnContainer}>
 
-        <View style={styles.columnContainer}>
+              <View style={styles.question}>
+                <Text style={styles.textquestion}>
+                  {'Choisir l\'image correspondant à un oiseau?'}
+                </Text>
+                </View>
 
-          <View style={styles.rowContainer}>
-            <View style={styles.column}>
-            </View>
 
-            <View style={styles.column}>
-            </View>
+              <View style={styles.rowContainer}>
+                  <View style={styles.column}>
+                  <TouchableHighlight
+                  onPress={() => { Alert.alert('You tapped the image!')}}>
+                    <Image
+                      style={styles.imageAnswerStyle}
+                      source={require('../../image/burger.jpg')}
+                    />
+                    </TouchableHighlight>
+                  </View>
 
-          </View>
+                  <View style={styles.column}>
+                  <TouchableHighlight
+                  onPress={() => { Alert.alert('You tapped the image!')}}>
+                  <Image
+                    style={styles.imageAnswerStyle}
+                    source={require('../../image/car.jpg')}
+                  />
+                  </TouchableHighlight>
+                  </View>
 
-          <View style={styles.rowContainer}>
-            <View style={styles.column}>
-            </View>
+                </View>
 
-            <View style={styles.column}>
-            </View>
+                <View style={styles.rowContainer}>
+                  <View style={styles.column}>
+                  <TouchableHighlight
+                  onPress={() => { Alert.alert('You tapped the image!')}}>
+                  <Image
+                    style={styles.imageAnswerStyle}
+                    source={require('../../image/dog.jpg')}
+                    />
+                  </TouchableHighlight>
+                  </View>
 
-          </View>
+                  <View style={styles.column}>
+                  <TouchableHighlight
+                  onPress={() => { Alert.alert('You tapped the image!')}}>
+                  <Image
+                    style={styles.imageAnswerStyle}
+                    source={require('../../image/oiseau.jpg')}
+                  />
+                  </TouchableHighlight>
+                  </View>
 
-          <View style={styles.rowContainer}>
+                </View>
 
-            <TouchableHighlight style={styles.buttonCheck}
-            onPress={() => { Alert.alert('You tapped the button!')}}>
+                <View style={styles.rowContainer}>
 
-                <Text>Check</Text>
-            </TouchableHighlight>
+                  <TouchableHighlight style={styles.buttonCheck}
+                  onPress={() => { Alert.alert('You tapped the buttobbn!')}}>
 
-          </View>
+                      <Text>Check</Text>
+                  </TouchableHighlight>
 
-        </View>
-      </View>
+                </View>
+
+              </View>
     );
   }
 }
 
  var width = Dimensions.get('window').width; //full width
  var columnWidth = width / 2 - 30;
+ var rowHeight = width / 2 - 10;
 
 const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'violet',
+  },
+
+  question : {
+    marginTop:10,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  textquestion : {
+    fontWeight : 'bold',
+    fontSize: 25
   },
 
   columnContainer: {
+    flex:1,
     flexDirection: 'column',
+    alignItems: 'stretch'
   },
   rowContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: 'black',
-    flexWrap: 'wrap'
-  },
+    height: rowHeight,
+    margin: 10
+      },
 
   column: {
-    borderColor:'blue',
-    backgroundColor: 'yellow',
-    alignSelf: 'stretch',
     margin: 10,
-    width: columnWidth,
-    height: columnWidth,
-    borderWidth:2,
+    flex:1,
+    alignItems: 'center',
+    borderColor: 'blue',
+    borderWidth: 2
+  },
+
+  imageAnswerStyle: {
+    margin: 5,
+    width: 160,
+    height: 160
   },
 
   buttonCheck: {
-    borderColor:'blue',
+    borderColor:'yellow',
     flex: 1,
     backgroundColor: 'green',
     alignSelf: 'stretch',
@@ -102,16 +186,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     margin: 10,
-    borderWidth:2,
-  },
-
-  column2: {
-    borderColor:'red',
-    backgroundColor: 'yellow',
-    alignSelf: 'stretch',
-    margin: 10,
-    width: columnWidth,
-    height: columnWidth,
     borderWidth:2,
   }
 });

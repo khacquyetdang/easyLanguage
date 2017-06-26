@@ -17,13 +17,13 @@ import {
 } from 'react-native';
 
 import _ from 'lodash'
-import PeopleIndexScreen from "./app/screens/PeopleIndexScreen"
-import PeopleShowScreen from "./app/screens/PeopleShowScreen"
+import HomeScreen from "./app/screens/HomeScreen"
+import TestVocabularyScreen from "./app/screens/TestVocabularyScreen"
 
 
 const easyLanguage = StackNavigator({
-  PeopleIndex: { screen: PeopleIndexScreen },
-  PeopleShow: { screen: PeopleShowScreen }
+  //Home: { screen: HomeScreen },
+  TestVocabulary: { screen: TestVocabularyScreen }
 });
 
 const styles = StyleSheet.create({

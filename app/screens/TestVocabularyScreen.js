@@ -134,6 +134,7 @@ class TestVocabularyScreen extends React.Component {
  var width = Dimensions.get('window').width; //full width
  var columnWidth = width / 2 - 30;
  var rowHeight = width / 2 - 10;
+ var imageSize = width / 3;
 
 const styles = StyleSheet.create({
 
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     height: rowHeight,
-    margin: 10
+    margin: 5
       },
 
   column: {
@@ -172,9 +173,9 @@ const styles = StyleSheet.create({
   },
 
   imageAnswerStyle: {
-    margin: 5,
-    width: 160,
-    height: 160
+    margin: 2,
+    width: imageSize,
+    height: imageSize
   },
 
   buttonCheck: {

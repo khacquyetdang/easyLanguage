@@ -19,43 +19,43 @@ class TestVocabularyScreen extends React.Component {
     title: 'Test vocabulaire',
   };
 
+  currentAnswer = 0;
+  currentQuestion = 0;
+
+  constructor() {
+    this.state = {
+      answerClicked : false,
+      currentAnswerMatched: false
+    }
+  }
 
 
-  myrender() {
-     const { params } = this.props.navigation.state;
-    return (
-              <View style={styles.columnContainer}>
+  goToNextTest()
+  {
+    if (currentAnswerMatched)
+    {
+      this.setState({answerClicked: false});
+      this.setState({currentAnswerMatched: false});
+      currentQuestion = currentQuestion + 1;
+    }
+  }
 
-                <View style={styles.rowContainer}>
-                  <View style={styles.column}>
-                  </View>
+  onImageClick(answer)
+  {
+    this.setState({answerClicked: true})
+    if (answer === currentAnswer)
+    {
+      this.setState({currentAnswerMatched: true})
+      // @TODO set Button go to next question to visible with the
+      // text go to next
+      // @TODO when click to the button
+    }
+    else {
+      // @TODO set Button go to next question to visible with the
+      // text wrong answer, try again
+    }
+    Alert.alert('You tapped the image! ' + answer);
 
-                  <View style={styles.column}>
-                  </View>
-
-                </View>
-
-                <View style={styles.rowContainer}>
-                  <View style={styles.column}>
-                  </View>
-
-                  <View style={styles.column}>
-                  </View>
-
-                </View>
-
-                <View style={styles.rowContainer}>
-
-                  <TouchableHighlight style={styles.buttonCheck}
-                  onPress={() => { Alert.alert('You tapped the buttobbn!')}}>
-
-                      <Text>Check</Text>
-                  </TouchableHighlight>
-
-                </View>
-
-              </View>
-    );
   }
 
   render() {
@@ -73,7 +73,7 @@ class TestVocabularyScreen extends React.Component {
               <View style={styles.rowContainer}>
                   <View style={styles.column}>
                   <TouchableHighlight
-                  onPress={() => { Alert.alert('You tapped the image!')}}>
+                  onPress={() => this.onImageClick(0)}>
                     <Image
                       style={styles.imageAnswerStyle}
                       source={require('../../image/burger.jpg')}

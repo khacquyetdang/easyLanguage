@@ -19,7 +19,7 @@ class TestVocabularyScreen extends React.Component {
     title: 'Test vocabulaire',
   };
 
-  currentAnswer = 0;
+  currentCorrectAnswer = 0;
   currentQuestion = 0;
 
   constructor() {
@@ -34,8 +34,7 @@ class TestVocabularyScreen extends React.Component {
   {
     if (currentAnswerMatched)
     {
-      this.setState({answerClicked: false});
-      this.setState({currentAnswerMatched: false});
+      this.setState({answerClicked: false, currentAnswerMatched: false});
       currentQuestion = currentQuestion + 1;
     }
   }
@@ -43,21 +42,36 @@ class TestVocabularyScreen extends React.Component {
   onImageClick(answer)
   {
     this.setState({answerClicked: true})
-    if (answer === currentAnswer)
+    if (answer === currentCorrectAnswer)
     {
       this.setState({currentAnswerMatched: true})
       // @TODO set Button go to next question to visible with the
       // text go to next
       // @TODO when click to the button
+      _renderNext();
     }
     else {
       // @TODO set Button go to next question to visible with the
       // text wrong answer, try again
+      Alert.alert('Wrong answer, try again!');
     }
-    Alert.alert('You tapped the image! ' + answer);
 
   }
 
+  _renderNext()
+  {
+    return (
+      <View style={styles.rowContainer}>
+
+        <TouchableHighlight style={styles.buttonCheck}
+        onPress={() => { Alert.alert('You tapped the buttobbn!')}}>
+
+            <Text>Correct answer, go next</Text>
+        </TouchableHighlight>
+
+      </View>
+    )
+  }
   render() {
      const { params } = this.props.navigation.state;
     return (
@@ -116,16 +130,7 @@ class TestVocabularyScreen extends React.Component {
 
                 </View>
 
-                <View style={styles.rowContainer}>
-
-                  <TouchableHighlight style={styles.buttonCheck}
-                  onPress={() => { Alert.alert('You tapped the buttobbn!')}}>
-
-                      <Text>Check</Text>
-                  </TouchableHighlight>
-
-                </View>
-
+              { this._renderNext() }
               </View>
     );
   }

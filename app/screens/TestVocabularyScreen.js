@@ -19,40 +19,46 @@ class TestVocabularyScreen extends React.Component {
     title: 'Test vocabulaire',
   };
 
-  currentCorrectAnswer = 0;
-  currentQuestion = 0;
 
-  constructor() {
+  constructor(props) {
+    super(props)
     this.state = {
       answerClicked : false,
-      currentAnswerMatched: false
+      currentAnswerMatched: false,
+      currentCorrectAnswer : 2,
+      currentQuestion : 0
+
     }
   }
 
 
   goToNextTest()
   {
-    if (currentAnswerMatched)
+    if (this.state.currentAnswerMatched)
     {
       this.setState({answerClicked: false, currentAnswerMatched: false});
-      currentQuestion = currentQuestion + 1;
+      var questionIndex =  this.state.currentQuestion + 1;
+      this.setState({currentQuestion: questionIndex});
     }
   }
 
   onImageClick(answer)
   {
     this.setState({answerClicked: true})
-    if (answer === currentCorrectAnswer)
+    if (answer === this.state.currentCorrectAnswer)
     {
       this.setState({currentAnswerMatched: true})
       // @TODO set Button go to next question to visible with the
       // text go to next
       // @TODO when click to the button
-      _renderNext();
+      this._renderNext();
     }
     else {
+      this.setState({currentAnswerMatched: false})
       // @TODO set Button go to next question to visible with the
-      // text wrong answer, try again
+      // text go to next
+      // @TODO when click to the button
+      this._renderNext();
       Alert.alert('Wrong answer, try again!');
     }
 
@@ -60,17 +66,23 @@ class TestVocabularyScreen extends React.Component {
 
   _renderNext()
   {
-    return (
-      <View style={styles.rowContainer}>
+    if (this.state.currentAnswerMatched)
+    {
+      return (
+        <View style={styles.rowContainer}>
 
-        <TouchableHighlight style={styles.buttonCheck}
-        onPress={() => { Alert.alert('You tapped the buttobbn!')}}>
+          <TouchableHighlight style={styles.buttonCheck}
+          onPress={() => { this.goToNextTest()}}>
 
-            <Text>Correct answer, go next</Text>
-        </TouchableHighlight>
+              <Text>Correct answer, go next</Text>
+          </TouchableHighlight>
 
-      </View>
-    )
+        </View>
+      )
+    }
+    else {
+      return null;
+    }
   }
   render() {
      const { params } = this.props.navigation.state;
@@ -97,7 +109,7 @@ class TestVocabularyScreen extends React.Component {
 
                   <View style={styles.column}>
                   <TouchableHighlight
-                  onPress={() => { Alert.alert('You tapped the image!')}}>
+                    onPress={() => this.onImageClick(1)}>
                   <Image
                     style={styles.imageAnswerStyle}
                     source={require('../../image/car.jpg')}
@@ -110,7 +122,7 @@ class TestVocabularyScreen extends React.Component {
                 <View style={styles.rowContainer}>
                   <View style={styles.column}>
                   <TouchableHighlight
-                  onPress={() => { Alert.alert('You tapped the image!')}}>
+                  onPress={() => this.onImageClick(2)}>
                   <Image
                     style={styles.imageAnswerStyle}
                     source={require('../../image/dog.jpg')}
@@ -120,7 +132,7 @@ class TestVocabularyScreen extends React.Component {
 
                   <View style={styles.column}>
                   <TouchableHighlight
-                  onPress={() => { Alert.alert('You tapped the image!')}}>
+                  onPress={() => this.onImageClick(3)}>
                   <Image
                     style={styles.imageAnswerStyle}
                     source={require('../../image/oiseau.jpg')}
@@ -184,7 +196,6 @@ const styles = StyleSheet.create({
   },
 
   buttonCheck: {
-    borderColor:'yellow',
     flex: 1,
     backgroundColor: 'green',
     alignSelf: 'stretch',
@@ -192,7 +203,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     margin: 10,
-    borderWidth:2,
+    borderWidth:1,
   }
 });
 

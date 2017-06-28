@@ -91,13 +91,14 @@ class TestVocabularyScreen extends React.Component {
                   onPress={() => { }}>
 
                       <Text>Wrong answer, go next</Text>
+                      <View style={{backgroundColor : 'black', height: 50, width: 60}}></View>
                   </TouchableHighlight>
 
                 </View>
               )
         }
       }
-      return null;
+      return <View style={{backgroundColor : 'blue', height: 50, width: 60}}></View>;
   }
   render() {
      const { params } = this.props.navigation.state;

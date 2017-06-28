@@ -25,7 +25,7 @@ class TestVocabularyScreen extends React.Component {
     this.state = {
       answerClicked : false,
       currentAnswerMatched: false,
-      currentCorrectAnswer : 2,
+      currentCorrectAnswer : 3,
       currentQuestion : 0
 
     }
@@ -59,30 +59,45 @@ class TestVocabularyScreen extends React.Component {
       // text go to next
       // @TODO when click to the button
       this._renderNext();
-      Alert.alert('Wrong answer, try again!');
     }
 
   }
 
   _renderNext()
   {
-    if (this.state.currentAnswerMatched)
+    console.log("render next")
+    if (this.state.answerClicked)
     {
-      return (
-        <View style={styles.rowContainer}>
+        if (this.state.currentAnswerMatched)
+        {
+          return (
+            <View style={styles.rowContainer}>
 
-          <TouchableHighlight style={styles.buttonCheck}
-          onPress={() => { this.goToNextTest()}}>
+              <TouchableHighlight style={styles.buttonCheck}
+              onPress={() => { this.goToNextTest()}}>
 
-              <Text>Correct answer, go next</Text>
-          </TouchableHighlight>
+                  <Text>Correct answer, go next</Text>
+              </TouchableHighlight>
 
-        </View>
-      )
-    }
-    else {
+            </View>
+          )
+        }
+        else {
+          return
+              (
+                <View style={styles.rowContainer}>
+
+                  <TouchableHighlight style={styles.buttonWrong}
+                  onPress={() => { }}>
+
+                      <Text>Wrong answer, go next</Text>
+                  </TouchableHighlight>
+
+                </View>
+              )
+        }
+      }
       return null;
-    }
   }
   render() {
      const { params } = this.props.navigation.state;
@@ -198,6 +213,17 @@ const styles = StyleSheet.create({
   buttonCheck: {
     flex: 1,
     backgroundColor: 'green',
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    margin: 10,
+    borderWidth:1,
+  },
+
+  buttonWrong: {
+    flex: 1,
+    backgroundColor: 'red',
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',

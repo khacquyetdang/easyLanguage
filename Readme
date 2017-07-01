@@ -15,3 +15,6 @@ gradlew clean quand il y a des probleme pour compiler
 
 
 emulator.exe -avd Nexus_6_API_23: pour lancer emulator
+
+
+gerkin pour écrere les scénarios

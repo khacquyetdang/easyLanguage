@@ -17,6 +17,7 @@ import {
 animalTest = [
   {
     "name":"singe",
+    "name_vn":"\"Con khỉ\"",
     "correctAnwser":2,
     "image_question":[  require("../../image/animal/coq.jpg"),
     require('../../image/animal/elephant.jpg'),
@@ -25,6 +26,7 @@ animalTest = [
   },
   {
     "name":"lion",
+    "name_vn" : "\"Con hổ\"",
     "correctAnwser":3,
     "image_question":[
       require('../../image/animal/elephant.jpg'),
@@ -35,7 +37,8 @@ animalTest = [
 
   {
     "name":"dog",
-    "correctAnwser":1,
+    "name_vn":"\"Con chó\"",
+    "correctAnwser":3,
     "image_question":[
       require('../../image/animal/chat.jpg'),
       require('../../image/animal/mouton.jpg'),
@@ -45,6 +48,7 @@ animalTest = [
 
   {
     "name":"chat",
+    "name_vn":"\"Con mèo\"",
     "correctAnwser":1,
     "image_question":[
       require('../../image/animal/cheval.jpg'),
@@ -54,6 +58,7 @@ animalTest = [
   },
   {
     "name":"cheval",
+    "name_vn":"\"Con ngựa\"",
     "correctAnwser":3,
     "image_question":[
       require('../../image/animal/coq.jpg'),
@@ -65,6 +70,7 @@ animalTest = [
 
   {
     "name":"elephant",
+    "name_vn":"\"Con voi\"",
     "correctAnwser":2,
     "image_question":[
       require('../../image/animal/dog.jpg'),
@@ -76,7 +82,8 @@ animalTest = [
 
   {
     "name":"coq",
-    "correctAnwser":1,
+    "name_vn":"\"Con gà trống\"",
+    "correctAnwser":0,
     "image_question":[
       require('../../image/animal/coq.jpg'),
       require('../../image/animal/singe.jpg'),
@@ -108,16 +115,23 @@ class TestVocabularyScreen extends React.Component {
   {
     if (this.state.currentAnswerMatched)
     {
-      this.setState({answerClicked: false, currentAnswerMatched: false});
-      var questionIndex =  this.state.currentQuestion + 1;
-      this.setState({currentQuestion: questionIndex});
+      if (this.state.currentQuestion < (animalTest.length - 1))
+      {
+        this.setState({answerClicked: false, currentAnswerMatched: false});
+        var questionIndex =  this.state.currentQuestion + 1;
+        this.setState({currentQuestion: questionIndex});
+      }
+      else {
+
+      }
     }
   }
 
   onImageClick(answer)
   {
+    var currentQuestion = animalTest[this.state.currentQuestion];
     this.setState({answerClicked: true})
-    if (answer === this.state.currentCorrectAnswer)
+    if (answer === currentQuestion.correctAnwser)
     {
       this.setState({currentAnswerMatched: true})
       // @TODO set Button go to next question to visible with the
@@ -181,7 +195,7 @@ class TestVocabularyScreen extends React.Component {
 
           <View style={styles.question}>
             <Text style={styles.textquestion}>
-              {'Choisir l\'image correspondant à ' + animalTest[this.state.currentQuestion].name}
+              {'Choisir l\'image correspondant à ' + animalTest[this.state.currentQuestion].name_vn}
             </Text>
           </View>
 

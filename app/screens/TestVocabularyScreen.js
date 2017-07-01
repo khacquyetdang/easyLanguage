@@ -14,6 +14,78 @@ import {
   Image
 } from 'react-native';
 
+animalTest = [
+  {
+    "name":"singe",
+    "correctAnwser":2,
+    "image_question":[  require("../../image/animal/coq.jpg"),
+    require('../../image/animal/elephant.jpg'),
+    require('../../image/animal/singe.jpg'),
+    require('../../image/animal/canard.jpg')]
+  },
+  {
+    "name":"lion",
+    "correctAnwser":3,
+    "image_question":[
+      require('../../image/animal/elephant.jpg'),
+      require('../../image/animal/hippopotamus.jpg'),
+      require('../../image/animal/mouton.jpg'),
+      require('../../image/animal/lion.jpg')]
+    },
+
+  {
+    "name":"dog",
+    "correctAnwser":1,
+    "image_question":[
+      require('../../image/animal/chat.jpg'),
+      require('../../image/animal/mouton.jpg'),
+      require('../../image/animal/lion.jpg'),
+      require('../../image/animal/dog.jpg')]
+  },
+
+  {
+    "name":"chat",
+    "correctAnwser":1,
+    "image_question":[
+      require('../../image/animal/cheval.jpg'),
+      require('../../image/animal/chat.jpg'),
+      require('../../image/animal/elephant.jpg'),
+      require('../../image/animal/lion.jpg')]
+  },
+  {
+    "name":"cheval",
+    "correctAnwser":3,
+    "image_question":[
+      require('../../image/animal/coq.jpg'),
+      require('../../image/animal/lion.jpg'),
+      require('../../image/animal/porc.jpg'),
+      require('../../image/animal/cheval.jpg')
+    ]
+  },
+
+  {
+    "name":"elephant",
+    "correctAnwser":2,
+    "image_question":[
+      require('../../image/animal/dog.jpg'),
+      require('../../image/animal/vache.jpg'),
+      require('../../image/animal/elephant.jpg'),
+      require('../../image/animal/porc.jpg')
+    ]
+  },
+
+  {
+    "name":"coq",
+    "correctAnwser":1,
+    "image_question":[
+      require('../../image/animal/coq.jpg'),
+      require('../../image/animal/singe.jpg'),
+      require('../../image/animal/vache.jpg'),
+      require('../../image/animal/canard.jpg')
+      ]
+  }
+]
+
 class TestVocabularyScreen extends React.Component {
   static navigationOptions = {
     title: 'Test vocabulaire',
@@ -100,12 +172,16 @@ class TestVocabularyScreen extends React.Component {
     }
     render() {
       const { params } = this.props.navigation.state;
+      const image1 = animalTest[this.state.currentQuestion].image_question[0];
+      const image2 = animalTest[this.state.currentQuestion].image_question[1];
+      const image3 = animalTest[this.state.currentQuestion].image_question[2];
+      const image4 = animalTest[this.state.currentQuestion].image_question[3];
       return (
         <View style={styles.columnContainer}>
 
           <View style={styles.question}>
             <Text style={styles.textquestion}>
-              {'Choisir l\'image correspondant à un oiseau?'}
+              {'Choisir l\'image correspondant à ' + animalTest[this.state.currentQuestion].name}
             </Text>
           </View>
 
@@ -116,7 +192,7 @@ class TestVocabularyScreen extends React.Component {
                 onPress={() => this.onImageClick(0)}>
                 <Image
                   style={styles.imageAnswerStyle}
-                  source={require('../../image/burger.jpg')}
+                  source={image1}
                   />
               </TouchableHighlight>
             </View>
@@ -126,7 +202,7 @@ class TestVocabularyScreen extends React.Component {
                 onPress={() => this.onImageClick(1)}>
                 <Image
                   style={styles.imageAnswerStyle}
-                  source={require('../../image/car.jpg')}
+                  source={image2}
                   />
               </TouchableHighlight>
             </View>
@@ -139,7 +215,7 @@ class TestVocabularyScreen extends React.Component {
                 onPress={() => this.onImageClick(2)}>
                 <Image
                   style={styles.imageAnswerStyle}
-                  source={require('../../image/dog.jpg')}
+                  source={image3}
                   />
               </TouchableHighlight>
             </View>
@@ -149,7 +225,7 @@ class TestVocabularyScreen extends React.Component {
                 onPress={() => this.onImageClick(3)}>
                 <Image
                   style={styles.imageAnswerStyle}
-                  source={require('../../image/oiseau.jpg')}
+                  source={image4}
                   />
               </TouchableHighlight>
             </View>

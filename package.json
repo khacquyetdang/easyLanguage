@@ -6,25 +6,23 @@
     "lint": "eslint .",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test_as_origin": "jest",
-    "test": "mocha --require test/setup-tests.js --recursive src/**/__specs__/*.spec.js",
+    "test": "mocha --require test/setup-tests.js --recursive app/**/__specs__/*.spec.js",
     "watch:test": "mocha --require test/setup-tests.js --recursive app/**/__specs__/*.spec.js --watch"
   },
-
   "nyc": {
     "exclude": [
       "**/*.spec.js",
       "test"
     ]
   },
-
   "dependencies": {
     "axios": "^0.9.1",
     "es6-symbol": "^3.0.2",
     "immutable": "^3.7.6",
-    "react": "16.0.0-alpha.12",
+    "react": "^0.14.8",
     "react-native": "0.45.1",
     "react-native-vector-icons": "^4.2.0",
-    "react-navigation": "^1.0.0-beta.11"
+    "react-navigation": "git+https://github.com/react-community/react-navigation.git#7165efce02a60eecc41813fe5e030883996671ec"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
@@ -46,7 +44,6 @@
     "remotedev-server": "0.0.3",
     "sinon": "^1.17.3"
   },
-
   "jest": {
     "preset": "react-native"
   }

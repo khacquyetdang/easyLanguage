@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "lint": "eslint .",
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "node_modules/.bin/cucumber-js __tests__/features -r __tests__/step_definitions -f pretty --compiler=js:babel-register",
     "test_as_origin": "jest",
     "test": "mocha --require test/setup-tests.js --recursive src/**/__specs__/*.spec.js",
     "watch:test": "mocha --require test/setup-tests.js --recursive app/**/__specs__/*.spec.js --watch"
@@ -19,8 +19,6 @@
 
   "dependencies": {
     "axios": "^0.9.1",
-    "es6-symbol": "^3.0.2",
-    "immutable": "^3.7.6",
     "react": "16.0.0-alpha.12",
     "react-native": "0.45.1",
     "react-native-vector-icons": "^4.2.0",

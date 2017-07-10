@@ -1,6 +1,6 @@
-
-
 import React, { Component } from 'react';
+import AnswerBox from '../components/AnswerBox.js';
+
 import {
   StyleSheet,
   Text,
@@ -19,7 +19,7 @@ animalTest = [
     "name":"singe",
     "name_vn":"\"Con khỉ\"",
     "correctAnwser":2,
-    "image_question":[  require("../../image/animal/coq.jpg"),
+    "image_question": [ require("../../image/animal/coq.jpg"),
     require('../../image/animal/elephant.jpg'),
     require('../../image/animal/singe.jpg'),
     require('../../image/animal/canard.jpg')]
@@ -185,7 +185,7 @@ class TestVocabularyScreen extends React.Component {
     return <View></View>;
     }
     render() {
-      const { params } = this.props.navigation.state;
+      //const { params } = this.props.navigation.state;
       const image1 = animalTest[this.state.currentQuestion].image_question[0];
       const image2 = animalTest[this.state.currentQuestion].image_question[1];
       const image3 = animalTest[this.state.currentQuestion].image_question[2];
@@ -201,48 +201,28 @@ class TestVocabularyScreen extends React.Component {
 
 
           <View style={styles.rowContainer}>
-            <View style={styles.column}>
-              <TouchableHighlight
-                onPress={() => this.onImageClick(0)}>
-                <Image
-                  style={styles.imageAnswerStyle}
-                  source={image1}
-                  />
-              </TouchableHighlight>
-            </View>
+            <AnswerBox style={styles.column}
+              imageSource={image1}
+              onPress={() => this.onImageClick(0)}>
+            </AnswerBox>
 
-            <View style={styles.column}>
-              <TouchableHighlight
-                onPress={() => this.onImageClick(1)}>
-                <Image
-                  style={styles.imageAnswerStyle}
-                  source={image2}
-                  />
-              </TouchableHighlight>
-            </View>
+            <AnswerBox style={styles.column}
+              imageSource={image2}
+              onPress={() => this.onImageClick(1)}>
+            </AnswerBox>
 
           </View>
 
           <View style={styles.rowContainer}>
-            <View style={styles.column}>
-              <TouchableHighlight
-                onPress={() => this.onImageClick(2)}>
-                <Image
-                  style={styles.imageAnswerStyle}
-                  source={image3}
-                  />
-              </TouchableHighlight>
-            </View>
+            <AnswerBox style={styles.column}
+              imageSource={image3}
+              onPress={() => this.onImageClick(2)}>
+            </AnswerBox>
 
-            <View style={styles.column}>
-              <TouchableHighlight
-                onPress={() => this.onImageClick(3)}>
-                <Image
-                  style={styles.imageAnswerStyle}
-                  source={image4}
-                  />
-              </TouchableHighlight>
-            </View>
+            <AnswerBox style={styles.column}
+              onPress={() => this.onImageClick(3)}
+              imageSource={image4}>
+            </AnswerBox>
 
           </View>
 

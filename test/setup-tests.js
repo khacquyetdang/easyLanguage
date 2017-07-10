@@ -1,5 +1,12 @@
 'use strict';
 
+require.extensions['.png'] = function () {
+   return null;
+ };
+ require.extensions['.jpg'] = function () {
+   return null;
+ };
+
 require('babel-register');
 require('babel-polyfill');
 require('react-native-mock/mock');

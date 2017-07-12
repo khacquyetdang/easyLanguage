@@ -103,11 +103,14 @@ class TestVocabularyScreen extends React.Component {
     super(props)
     this.state = {
       answerClicked : false,
+      answerId: -1,
       currentAnswerMatched: false,
       currentCorrectAnswer : 3,
       currentQuestion : 0
+    };
 
-    }
+    this.answerClicked = this.answerClicked.bind(this);
+
   }
 
 
@@ -119,7 +122,7 @@ class TestVocabularyScreen extends React.Component {
       {
         this.setState({answerClicked: false, currentAnswerMatched: false});
         var questionIndex =  this.state.currentQuestion + 1;
-        this.setState({currentQuestion: questionIndex});
+        this.setState({currentQuestion: questionIndex, answerId: -1,});
       }
       else {
 
@@ -127,10 +130,10 @@ class TestVocabularyScreen extends React.Component {
     }
   }
 
-  onImageClick(answer)
+  answerClicked(answer)
   {
     var currentQuestion = animalTest[this.state.currentQuestion];
-    this.setState({answerClicked: true})
+    this.setState({answerClicked: true, answerId:answer})
     if (answer === currentQuestion.correctAnwser)
     {
       this.setState({currentAnswerMatched: true})
@@ -151,7 +154,6 @@ class TestVocabularyScreen extends React.Component {
 
   _renderNext()
   {
-    console.log("render next")
     if (this.state.answerClicked)
     {
 
@@ -163,7 +165,7 @@ class TestVocabularyScreen extends React.Component {
             <TouchableHighlight style={styles.buttonCheck}
               onPress={() => { this.goToNextTest()}}>
 
-              <Text>Correct answer, go next</Text>
+              <Text>Bonne réponse, continuer</Text>
             </TouchableHighlight>
 
           </View>
@@ -176,7 +178,7 @@ class TestVocabularyScreen extends React.Component {
             <TouchableHighlight style={styles.buttonWrongAnswer}
               onPress={() => {}}>
 
-              <Text style={styles.textWrongAnswer}>Wrong answer, try again</Text>
+              <Text style={styles.textWrongAnswer}>Essayer à nouveau</Text>
             </TouchableHighlight>
           </View>
         )
@@ -201,26 +203,34 @@ class TestVocabularyScreen extends React.Component {
 
 
           <View style={styles.rowContainer}>
-            <AnswerBox style={styles.column}
-              imageSource={image1}
-              onPress={() => this.onImageClick(0)}>
+            <AnswerBox
+              id={0}
+              active={this.state.answerId == 0}
+              onAnswerSubmit={this.answerClicked}
+              imageSource={image1}>
             </AnswerBox>
 
-            <AnswerBox style={styles.column}
-              imageSource={image2}
-              onPress={() => this.onImageClick(1)}>
+            <AnswerBox
+              id={1}
+              active={this.state.answerId == 1}
+              onAnswerSubmit={this.answerClicked}
+              imageSource={image2}>
             </AnswerBox>
 
           </View>
 
           <View style={styles.rowContainer}>
-            <AnswerBox style={styles.column}
+            <AnswerBox
               imageSource={image3}
-              onPress={() => this.onImageClick(2)}>
+              active={this.state.answerId == 2}
+              id={2}
+              onAnswerSubmit={this.answerClicked}>
             </AnswerBox>
 
-            <AnswerBox style={styles.column}
-              onPress={() => this.onImageClick(3)}
+            <AnswerBox
+              id={3}
+              active={this.state.answerId == 3}
+              onAnswerSubmit={this.answerClicked}
               imageSource={image4}>
             </AnswerBox>
 
@@ -233,7 +243,7 @@ class TestVocabularyScreen extends React.Component {
   }
 
   var width = Dimensions.get('window').width; //full width
-  var columnWidth = width / 2 - 30;
+  var columnWidth = width / 2 - 40;
   var rowHeight = width / 2 - 10;
   var imageSize = width / 3;
 
@@ -262,21 +272,8 @@ class TestVocabularyScreen extends React.Component {
     rowContainer: {
       flexDirection: 'row',
       height: rowHeight,
-      margin: 5
-    },
-
-    column: {
-      margin: 10,
-      flex:1,
       alignItems: 'center',
-      borderColor: 'blue',
-      borderWidth: 2
-    },
-
-    imageAnswerStyle: {
-      margin: 2,
-      width: imageSize,
-      height: imageSize
+      margin: 5
     },
 
     buttonCheck: {

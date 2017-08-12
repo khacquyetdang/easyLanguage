@@ -24,6 +24,11 @@ defineSupportCode(function({Then, When, Given}) {
     callback();
   });
 
+  When('il sélectionne la bonne réponse de la première proposition', function (callback) {
+    this.exercise.addAnswer(this.exercise.rightAnswer);
+    callback();
+  });
+
 
 
   Then('le challenge devrait être réussi', function (callback) {

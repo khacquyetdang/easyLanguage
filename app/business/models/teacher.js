@@ -1,9 +1,27 @@
-import Exercise from './exercise';
-import Question from './question';
+import MultipleChoice from './multipleChoice/multipleChoice'
+import MultipleChoiceStem from './multipleChoice/multipleChoiceStem'
 
 class Teacher {
   constructor(dictionary) {
     this.dictionary = dictionary;
+  }
+
+  createQCM() {
+    var multipleChoice = new MultipleChoice();
+    var stem = this.generateStem();
+
+    multipleChoice.addStem(stem);
+
+    return multipleChoice;
+  }
+
+  createQCMOnFamily(family) {
+    var multipleChoice = new MultipleChoice();
+    var stem = this.generateStemOnFamily(family);
+
+    multipleChoice.addStem(stem);
+
+    return multipleChoice;
   }
 
   createChallenge() {
@@ -17,6 +35,42 @@ class Teacher {
     }
 
     return exercise;
+  }
+
+  generateStem() {
+    var availableWords = this.dictionary.getWords();
+    var distractions = [];
+    var distraction;
+
+    var key = this.selectRandomWord(availableWords);
+
+    for (var index = 0; index < 3; index++) {  
+      do {
+        distraction = this.selectRandomWord(availableWords);
+      }
+      while(distraction === key || this.isAlreadyProposed(distraction, distractions))
+      distractions.push(distraction);
+    }
+
+    return new MultipleChoiceStem(key, distractions);
+  }
+
+  generateStemOnFamily(family) {
+    var availableWords = this.dictionary.getWords();
+    var distractions = [];
+    var distraction;
+
+    var key = this.selectRandomWordOfFamily(availableWords, family);
+
+    for (var index = 0; index < 3; index++) {  
+      do {
+        distraction = this.selectRandomWord(availableWords);
+      }
+      while(distraction === key || this.isAlreadyProposed(distraction, distractions))
+      distractions.push(distraction);
+    }
+
+    return new MultipleChoiceStem(key, distractions);
   }
 
   generatePropositions(availableWords, word) {
@@ -46,7 +100,7 @@ class Teacher {
     return availableWords[randomWordIndice];
   }
 
-  selectRandomWords(availableWords, randomWordsCount) {
+  selectRandomWordsOfFamily(availableWords) {
     
   }
 };

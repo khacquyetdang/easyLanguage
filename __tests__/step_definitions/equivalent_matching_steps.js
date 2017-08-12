@@ -31,6 +31,22 @@ defineSupportCode(function({Then, When, Given}) {
     callback();
   });
 
+  Given('l\'apprenant viêtnamien challenge son vocabulaire français', function (callback) {
+    this.vietnamienDictionary.addEquivalent("hello", "bonjour");
+    this.vietnamienDictionary.addEquivalent("good", "bien");
+    this.vietnamienDictionary.addEquivalent("bad", "mauvais");
+    this.vietnamienDictionary.addEquivalent("right", "correcte");
+    this.vietnamienDictionary.addEquivalent("wrong", "faux");
+    this.vietnamienDictionary.addEquivalent("fast", "rapide");
+    this.vietnamienDictionary.addEquivalent("slow", "lent");
+    this.vietnamienDictionary.addEquivalent("tall", "grand");
+    this.vietnamienDictionary.addEquivalent("small", "petit");
+    this.vietnamienDictionary.addEquivalent("black", "noir");
+    this.vietnamienDictionary.addEquivalent("white", "blanc");
+    
+    callback();
+  });
+
 
   When('l\'apprenant répond "{answer}"', function (answer, callback) {
     this.exercise.addAnswer(answer);

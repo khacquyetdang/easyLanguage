@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "node_modules/.bin/cucumber-js __tests__/features -r __tests__/step_definitions -f pretty --compiler=js:babel-register",
+    "test": "node_modules/.bin/cucumber-js __tests__/features/multipleChoice.feature -r __tests__/step_definitions -f pretty --compiler=js:babel-register",
     "test_as_origin": "jest"
   },
   "dependencies": {

@@ -41,10 +41,11 @@ Fonctionnalité: Vérification des bonnes réponses
     | "Bonjour "    |
     | "  Bonjour  " |
 
- Plan du scénario: Mots composés
-   La réponse devrait être correcte lorsque le mot correspond à un équivalent composé
 
-   Etant donné qu'un apprenant est interrogé sur l'équivalent français de <mot à traduire>
+  Plan du scénario: Mots composés
+  La réponse devrait être correcte lorsque le mot correspond à un équivalent composé
+
+    Etant donné qu'un apprenant est interrogé sur l'équivalent français de <mot à traduire>
       Et que <cette réponse> est l'équivalent de <mot à traduire>
     Lorsque l'apprenant répond <cette réponse>
     Alors la réponse devrait être correcte
@@ -56,7 +57,7 @@ Fonctionnalité: Vérification des bonnes réponses
     | mot composé détaché         | "Hello"        | "pommes de terre" |
 
 
- Plan du scénario: Erreur d'orthographe
+  Plan du scénario: Erreur d'orthographe
     La réponse devrait être incorrecte lorsqu'il y a une faute d'orthographe.
     La casse sensitive ne fait pas partie des erreurs
 

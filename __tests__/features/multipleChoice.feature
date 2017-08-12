@@ -32,5 +32,6 @@ Fonctionnalité: Questionnaire à choix multiples de vocabulaire
   Scénario: Restriction du qcm à une liste de tags
     L'apprenant devrait cibler son apprentissage sur une famille de mots
     
-    Lorsque l'apprenant commence un QCM sur la famille "couleur"
-    Alors toutes les tiges créées font parties de la famille sélectionnée
+    Lorsque l'apprenant commence un QCM sur la famille "adjectif"
+    Alors toutes ses tiges devraient être générées avec 1 clé et 3 distractions
+      Et toutes les tiges créées font parties de la famille "adjectif"

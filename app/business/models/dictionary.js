@@ -69,6 +69,12 @@ class Dictionary {
 
     return undefined;
   }
+
+  isOfFamily(word, expectedFamily) {
+    return this.families[word].find(function(family) {
+      return family === expectedFamily;
+    }) !== undefined;
+  }
 };
 
 export default Dictionary;

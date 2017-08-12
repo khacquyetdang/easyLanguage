@@ -56,11 +56,21 @@ class Teacher {
   }
 
   generateStemOnFamily(family) {
-    var availableWords = this.dictionary.getWords();
+    var availableWords = [];
     var distractions = [];
     var distraction;
 
-    var key = this.selectRandomWordOfFamily(availableWords, family);
+    this.dictionary.getWords().forEach(function(word) {
+      if(this.dictionary.isOfFamily(word, family)) {
+        availableWords.push(word);
+      }
+    }, this);
+
+    if(availableWords.length < 4) {
+      return undefined;
+    }
+
+    var key = this.selectRandomWord(availableWords);
 
     for (var index = 0; index < 3; index++) {  
       do {
@@ -98,10 +108,6 @@ class Teacher {
   selectRandomWord(availableWords) {
     var randomWordIndice = Math.floor(Math.random() * (availableWords.length - 1))
     return availableWords[randomWordIndice];
-  }
-
-  selectRandomWordsOfFamily(availableWords) {
-    
   }
 };
 

@@ -1,11 +1,22 @@
 import Teacher from '../../app/business/models/teacher.js'
 import Dictionary from '../../app/business/models/dictionary.js'
 import MultipleChoice from '../../app/business/models/multipleChoice/multipleChoice.js'
+import MultipleChoiceRunner from '../../app/business/models/multipleChoice/multipleChoiceRunner.js'
 
-class QCMContext {
+class MCQContext {
     constructor() {
         this.vietnamienDictionary = new Dictionary();
         this.teacher = new Teacher(this.vietnamienDictionary);
+        this.runnedStems = [];
+        this.mcqIsOver = false;
+    }
+
+    notifyRun(stem) {
+        this.runnedStems.push(stem);
+    }
+
+    notifyEnd() {
+        this.mcqIsOver = true;
     }
 
     initDictionary(table, vietnamienWordKey, frenchWordKey) {
@@ -49,4 +60,4 @@ class QCMContext {
     }
 };
 
-export default QCMContext;
+export default MCQContext;

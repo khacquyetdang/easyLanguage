@@ -30,6 +30,10 @@ class MultipleChoice {
   getStems() {
     return this.stems;
   }
+
+  answer(answer) {
+    this.answers.push(answer);
+  }
 };
 
 export default MultipleChoice;

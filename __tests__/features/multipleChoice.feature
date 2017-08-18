@@ -35,3 +35,16 @@ Fonctionnalité: Questionnaire à choix multiples de vocabulaire
     Lorsque l'apprenant commence un QCM sur la famille "adjectif"
     Alors toutes ses tiges devraient être générées avec 1 clé et 3 distractions
       Et toutes les tiges créées font parties de la famille "adjectif"
+
+  Scénario: Déroulement du qcm
+    L'apprenant peut dérouler un qcm jusqu'à sa fin
+
+    Lorsque l'apprenant commence un QCM de 3 tiges
+    Alors la première tige devrait lui être proposée
+    Lorsque l'apprenant répond à la tige en cours
+    Alors la seconde tige devrait lui être proposée
+    Lorsque l'apprenant répond à la tige en cours
+    Alors la troisième tige devrait lui être proposée
+    Lorsque l'apprenant répond à la tige en cours
+    Alors la fin du QCM devrait lui être indiquée
+    

@@ -3,30 +3,31 @@
 var {defineSupportCode} = require('cucumber');
 var assert = require('assert');
 
-import QCMContext from '../support/qcmContext.js'
+import MCQContext from '../support/mcqContext.js'
+import MultipleChoiceRunner from '../../app/business/models/multipleChoice/multipleChoiceRunner.js'
 
 defineSupportCode(function({setWorldConstructor}) {
-  setWorldConstructor(QCMContext);
+  setWorldConstructor(MCQContext);
 });
 
 defineSupportCode(function({Then, When, Given}) {
   When('l\'apprenant commence un QCM', function (callback) {
-    this.qcm = this.teacher.createQCM();
+    this.mcq = this.teacher.createQCM(10);
     callback();
   });
 
   When('l\'apprenant commence un QCM sur la famille "{family}"', function (family, callback) {
-    this.qcm = this.teacher.createQCMOnFamily(family);
+    this.mcq = this.teacher.createQCMOnFamily(family);
     callback();
   });
 
   Then('toutes ses tiges devraient être générées avec {expectedKeyCount} clé et {expectedDistractionCount} distractions',
   function (expectedKeyCount, expectedDistractionCount, callback) {
-    var stems = this.qcm.stems;
+    var stems = this.mcq.stems;
     var countOfWrongStems = 0;
     var errorReport = [];
     
-    for(var indice=0; indice < this.qcm.stems.length; indice++) {
+    for(var indice=0; indice < this.mcq.stems.length; indice++) {
       var stem = stems[indice];
       if(this.assertStemIncoherence(stem, indice, parseInt(expectedDistractionCount), errorReport)) {
         countOfWrongStems++;
@@ -42,11 +43,11 @@ defineSupportCode(function({Then, When, Given}) {
   });
 
   Then('toutes les tiges créées font parties de la famille "{family}"', function (family, callback) {
-    var stems = this.qcm.stems;
+    var stems = this.mcq.stems;
     var countOfWrongStems = 0;
     var errorReport = [];
     
-    for(var indice=0; indice < this.qcm.stems.length; indice++) {
+    for(var indice=0; indice < this.mcq.stems.length; indice++) {
       var stem = stems[indice];
       if(!this.vietnamienDictionary.isOfFamily(stem.key, family)) {
         countOfWrongStems++;
@@ -56,7 +57,7 @@ defineSupportCode(function({Then, When, Given}) {
         if(!this.vietnamienDictionary.isOfFamily(distraction, family)) {
           countOfWrongStems++;
           errorReport.push("A distraction of the " + (indice+1) + "e stem is not of the family " + family);
-        }
+        } 
       }, this);
     }
     
@@ -69,4 +70,36 @@ defineSupportCode(function({Then, When, Given}) {
     callback();
   });
 
+  When('l\'apprenant commence un QCM de {int} tiges', function (int, callback) {
+    this.mcq = this.teacher.createQCM(3);
+    this.mcqRunner = new MultipleChoiceRunner(this.mcq);
+    this.mcqRunner.registerObserver(this);
+    this.mcqRunner.start();
+    callback();
+  });
+
+  Then('la première tige devrait lui être proposée', function (callback) {
+    assert.equal(this.runnedStems[0], this.mcq.stems[0]);
+    callback();
+  });
+
+  When('l\'apprenant répond à la tige en cours', function (callback) {
+    this.mcqRunner.answer("Dummy");
+    callback();
+  });
+
+  Then('la seconde tige devrait lui être proposée', function (callback) {
+    assert.equal(this.runnedStems[1], this.mcq.stems[1]);
+    callback();
+  });
+
+  Then('la troisième tige devrait lui être proposée', function (callback) {
+    assert.equal(this.runnedStems[2], this.mcq.stems[2]);
+    callback();
+  });
+
+  Then('la fin du QCM devrait lui être indiquée', function (callback) {
+    assert.equal(true, this.mcqIsOver);
+    callback();
+  });
 });

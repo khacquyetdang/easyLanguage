@@ -6,11 +6,13 @@ class Teacher {
     this.dictionary = dictionary;
   }
 
-  createQCM() {
+ createQCM(countOfSteam) {
     var multipleChoice = new MultipleChoice();
-    var stem = this.generateStem();
-
-    multipleChoice.addStem(stem);
+    
+    for(var steamIndice = 0; steamIndice < countOfSteam; steamIndice++) {
+      var stem = this.generateStem();
+      multipleChoice.addStem(stem);
+    }
 
     return multipleChoice;
   }
